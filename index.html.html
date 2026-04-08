@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jenifer Oliveira — Product Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1A18;
+    --accent: #C8622A;
+    --muted: #7A7A72;
+    --border: #E0DAD0;
+    --card: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    padding: 8rem 4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 2rem; height: 1px;
+    background: var(--accent);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1px solid var(--dark);
+    color: var(--dark);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--dark); color: var(--cream); transform: translateY(-2px); }
+
+  .hero-right {
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(200, 98, 42, 0.12);
+    top: -100px; right: -100px;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    max-width: 360px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s;
+  }
+  .stat-card:hover { background: rgba(255,255,255,0.07); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION COMMON */
+  section { padding: 7rem 4rem; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .section-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: var(--dark);
+  }
+
+  /* WORK */
+  #work { background: var(--cream); }
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .case-card {
+    background: var(--card);
+    padding: 3rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .case-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 2.5rem; right: 2.5rem;
+    font-size: 1.2rem;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .case-card:hover::after { opacity: 1; transform: translateX(0); }
+  .case-card.featured {
+    grid-column: span 2;
+    background: var(--dark);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .case-card.featured::after { color: var(--accent); }
+  .case-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .case-card.featured .case-tag { color: rgba(200,98,42,0.9); }
+  .case-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .case-card.featured .case-title { font-size: 2rem; color: var(--cream); }
+  .case-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .case-card.featured .case-desc { color: rgba(245,240,232,0.6); }
+  .case-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .pill {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .case-card.featured .pill {
+    border-color: rgba(255,255,255,0.15);
+    color: rgba(245,240,232,0.5);
+  }
+  .case-visual {
+    aspect-ratio: 4/3;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.05em;
+  }
+  .coming-soon {
+    background: var(--cream);
+    border: 1px dashed var(--border);
+  }
+  .coming-soon .case-title { color: var(--muted); }
+  .coming-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #FFF3EC;
+    color: var(--accent);
+    padding: 0.25rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--dark);
+    color: var(--cream);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .about-left {}
+  .about-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .about-role {
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .about-bio {
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+  .about-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .about-link {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.75rem;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .about-link:hover { opacity: 1; }
+  .about-link::before {
+    content: '↗';
+    color: var(--accent);
+  }
+  .about-right {}
+  .skills-group { margin-bottom: 2.5rem; }
+  .skills-group-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .skills-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .skill-tag {
+    font-size: 0.82rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(245,240,232,0.7);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--cream); }
+
+  /* EXPERIENCE */
+  #experience { background: var(--cream); }
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .exp-item:first-child { border-top: 1px solid var(--border); }
+  .exp-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    padding-top: 0.25rem;
+  }
+  .exp-right {}
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+  .exp-company {
+    font-size: 0.82rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+  .exp-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--accent);
+    color: var(--cream);
+    text-align: center;
+    padding: 8rem 4rem;
+  }
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .contact-sub {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+  .contact-email {
+    display: inline-block;
+    font-size: 1.1rem;
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    padding-bottom: 0.2rem;
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s;
+  }
+  .contact-email:hover { border-color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(245,240,232,0.35);
+    text-align: center;
+    padding: 2rem 4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeIn 0.7s ease forwards;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.6s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 2rem 4rem; }
+    .hero-right { padding: 3rem 2rem; min-height: 280px; }
+    section { padding: 5rem 2rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .case-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Jenifer Oliveira</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag fade-in">Product Designer · London, UK</p>
+    <h1 class="hero-title fade-in delay-1">
+      Design that <em>thinks</em><br>as well as it looks
+    </h1>
+    <p class="hero-desc fade-in delay-2">
+      Product Designer with 4+ years of experience and a background in Production Engineering. I bring analytical rigour to UX — from discovery through to delivery.
+    </p>
+    <div class="hero-ctas fade-in delay-3">
+      <a href="#work" class="btn-primary">View Work</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats fade-in delay-2">
+      <div class="stat-card">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10k+</div>
+        <div class="stat-label">Startups on ZING</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">B2B</div>
+        <div class="stat-label">& B2C products</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">SaaS</div>
+        <div class="stat-label">Platforms built</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header">
+    <span class="section-tag">Selected work</span>
+    <h2 class="section-title">Case studies</h2>
+  </div>
+  <div class="work-grid">
+
+    <!-- Featured -->
+    <a href="https://sites.google.com/view/jenifersoliveira/123milhas-checkout" target="_blank" class="case-card featured">
+      <div>
+        <p class="case-tag">UX / Product Design</p>
+        <h3 class="case-title">Redesigning checkout for 123milhas</h3>
+        <p class="case-desc">Reduced abandonment and increased sales by simplifying the user journey and addressing key friction points on one of Brazil's largest travel platforms.</p>
+        <div class="case-tags">
+          <span class="pill">UX Research</span>
+          <span class="pill">Interaction Design</span>
+          <span class="pill">Conversion</span>
+          <span class="pill">B2C</span>
+        </div>
+      </div>
+      <div class="case-visual">123</div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="https://sites.google.com/view/jenifersoliveira/módulo-de-férias" target="_blank" class="case-card">
+      <p class="case-tag">Internal Tooling</p>
+      <h3 class="case-title">Holiday request & approval system</h3>
+      <p class="case-desc">Designed an internal HR tool that simplified leave requests and improved employee access to holiday information at IEBT Innovation.</p>
+      <div class="case-tags">
+        <span class="pill">Product Design</span>
+        <span class="pill">Internal Tools</span>
+        <span class="pill">B2B</span>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="https://sites.google.com/view/jenifersoliveira/zing" target="_blank" class="case-card">
+      <p class="case-tag">Platform Design</p>
+      <h3 class="case-title">ZING Innovation platform</h3>
+      <p class="case-desc">Designed an in-house innovation management platform from scratch — now hosting over 10,000 startups and reducing operational costs significantly.</p>
+      <div class="case-tags">
+        <span class="pill">End-to-end Design</span>
+        <span class="pill">SaaS</span>
+        <span class="pill">Scale</span>
+      </div>
+    </a>
+
+    <!-- Coming soon -->
+    <div class="case-card coming-soon">
+      <span class="coming-tag">Coming soon</span>
+      <h3 class="case-title">What's for Dinner</h3>
+      <p class="case-desc">A meal planning app that suggests nutritionally balanced dinners based on food groups — a personal project designed end-to-end from discovery to prototype.</p>
+      <div class="case-tags">
+        <span class="pill">Personal Project</span>
+        <span class="pill">Mobile UX</span>
+        <span class="pill">In progress</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <h2 class="about-name">Jenifer Oliveira</h2>
+      <p class="about-role">Product Designer · London</p>
+      <p class="about-bio">
+        I'm a Product Designer with a background in Production Engineering — a combination that shapes how I approach every project. I think in systems, ask why before how, and care deeply about whether a design actually solves the right problem.
+      </p>
+      <p class="about-bio">
+        I've spent the last 4+ years designing digital products across SaaS, B2B, and B2C platforms, mostly working as a contractor embedded in client teams. I'm comfortable working autonomously and collaborating closely with developers and business stakeholders to make sure design decisions hold up in practice.
+      </p>
+      <p class="about-bio">
+        Now based in London, I'm looking for my next opportunity to build meaningful products in the UK market.
+      </p>
+      <div class="about-links" style="margin-top: 2rem;">
+        <a href="https://www.linkedin.com/in/jenifer-oliveiras/" target="_blank" class="about-link">LinkedIn</a>
+        <a href="mailto:jenifersilva880@gmail.com" class="about-link">jenifersilva880@gmail.com</a>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="skills-group">
+        <p class="skills-group-title">Design</p>
+        <div class="skills-list">
+          <span class="skill-tag">End-to-end Product Design</span>
+          <span class="skill-tag">UX Research</span>
+          <span class="skill-tag">Wireframing</span>
+          <span class="skill-tag">Prototyping</span>
+          <span class="skill-tag">Design Systems</span>
+          <span class="skill-tag">Usability Testing</span>
+          <span class="skill-tag">Interaction Design</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <p class="skills-group-title">Operations</p>
+        <div class="skills-list">
+          <span class="skill-tag">Backlog Management</span>
+          <span class="skill-tag">QA (Functional & UI)</span>
+          <span class="skill-tag">Workflow Optimisation</span>
+          <span class="skill-tag">Stakeholder Management</span>
+          <span class="skill-tag">Agile / Scrum</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <p class="skills-group-title">Tools</p>
+        <div class="skills-list">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Notion</span>
+          <span class="skill-tag">Miro</span>
+          <span class="skill-tag">Webflow</span>
+          <span class="skill-tag">Asana</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-tag">Career</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-date">Jun 2025 — Present</div>
+      <div class="exp-right">
+        <h3 class="exp-role">Product Operations Analyst</h3>
+        <p class="exp-company">IEBT Innovation</p>
+        <p class="exp-desc">Managing Jira backlog and sprint ceremonies for two innovation platform projects. Performing functional and UI QA, identifying critical bugs before launch. Contributing to UX improvements on platforms serving enterprise clients including one of Brazil's largest banks.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jun 2023 — Jun 2025</div>
+      <div class="exp-right">
+        <h3 class="exp-role">Product Designer</h3>
+        <p class="exp-company">123milhas (via IEBT Innovation)</p>
+        <p class="exp-desc">Led end-to-end redesign of key features across the 123milhas website and app — one of Brazil's largest travel platforms. Focused on improving conversion rates and reducing friction in the customer journey.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Feb 2023 — May 2023</div>
+      <div class="exp-right">
+        <h3 class="exp-role">Chapter Lead — Figma</h3>
+        <p class="exp-company">IEBT Innovation</p>
+        <p class="exp-desc">Designed and delivered an internal Figma training programme for 15 team members, covering Design Systems, Auto Layout, Prototyping, and component standards.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Apr 2022 — Sep 2022</div>
+      <div class="exp-right">
+        <h3 class="exp-role">UX/UI Designer — ZING Innovation</h3>
+        <p class="exp-company">IEBT Innovation</p>
+        <p class="exp-desc">Designed ZING Innovation from the ground up — a platform that now hosts over 10,000 startups and significantly reduced the cost of managing corporate innovation challenges.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jun 2021 — Apr 2022</div>
+      <div class="exp-right">
+        <h3 class="exp-role">Digital Product Intern</h3>
+        <p class="exp-company">D20 Labs</p>
+        <p class="exp-desc">Supported UI design and facilitated collaboration between design and development teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2 class="contact-title">Let's work<br>together</h2>
+  <p class="contact-sub">Open to Product Designer and Product Ops roles in London.</p>
+  <a href="mailto:jenifersilva880@gmail.com" class="contact-email">jenifersilva880@gmail.com</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Jenifer Oliveira · London, United Kingdom</p>
+</footer>
+
+<script>
+  // Scroll-triggered fade-in for sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.exp-item, .case-card, .skills-group').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
